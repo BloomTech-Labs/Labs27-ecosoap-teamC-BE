@@ -17,7 +17,7 @@ exports.up = (knex) => {
       table.string('country').notNullable();
     })
     .createTable('orders', function (table) {
-      table.uuid('id');
+      table.increments();
       table.string('organizationName').notNullable();
       table.string('organizationWebsite').notNullable();
       table.string('contactName').notNullable();
