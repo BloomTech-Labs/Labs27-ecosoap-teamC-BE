@@ -184,6 +184,7 @@ router.post('/', authRequired, async (req, res) => {
     res.status(404).json({ message: 'Profile missing' });
   }
 });
+
 /**
  * @swagger
  * /profile:

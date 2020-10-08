@@ -28,3 +28,11 @@ router.get('/:id', function (req, res) {
       res.status(500).json({ error: err.message });
     });
 });
+
+router.post('/', (req, res) => {
+  const order = req.body;
+  if (order) {
+  } else {
+    res.status(404).json({ message: 'Order missing' });
+  }
+});
