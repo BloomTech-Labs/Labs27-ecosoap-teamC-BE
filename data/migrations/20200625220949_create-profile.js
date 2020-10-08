@@ -17,22 +17,13 @@ exports.up = (knex) => {
       table.string('country').notNullable();
     })
     .createTable('orders', function (table) {
-<<<<<<< HEAD
       table.increments();
-=======
-      table.uuid('id');
->>>>>>> cafe1710b2dff03857cdd279ebd971881d127eeb
       table.string('organizationName').notNullable();
       table.string('organizationWebsite').notNullable();
       table.string('contactName').notNullable();
       table.integer('soapBarNum').notNullable();
-<<<<<<< HEAD
       table.string('contactPhone').notNullable();
       table.string('contactEmail', 320).notNullable();
-=======
-      table.integer('contactPhone').notNullable();
-      table.string('contactEmail').notNullable();
->>>>>>> cafe1710b2dff03857cdd279ebd971881d127eeb
       table.string('address');
       table.string('country').notNullable();
       table.integer('beneficiariesNum').notNullable();
@@ -55,8 +46,4 @@ exports.down = (knex) => {
     .dropTableIfExists('orders')
     .dropTableIfExists('buyer')
     .dropTableIfExists('administrator');
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> cafe1710b2dff03857cdd279ebd971881d127eeb
