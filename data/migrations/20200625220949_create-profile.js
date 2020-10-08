@@ -22,8 +22,8 @@ exports.up = (knex) => {
       table.string('organizationWebsite').notNullable();
       table.string('contactName').notNullable();
       table.integer('soapBarNum').notNullable();
-      table.integer('contactPhone').notNullable();
-      table.string('contactEmail').notNullable();
+      table.integer('contactPhone', 10).notNullable();
+      table.string('contactEmail', 320).notNullable();
       table.string('address');
       table.string('country').notNullable();
       table.integer('beneficiariesNum').notNullable();
