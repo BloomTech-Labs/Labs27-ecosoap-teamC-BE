@@ -2,18 +2,32 @@ var dotenv = require('dotenv');
 dotenv.config({ path: '../.env' });
 
 module.exports = {
+  // development: {
+  //   client: 'pg',
+  //   connection: process.env.DATABASE_URL,
+  //   migrations: { directory: '../data/migrations' },
+  //   seeds: { directory: '../data/seeds' },
+  //   pool: {
+  //     min: 2,
+  //     max: 10,
+  //   },
+  // },
   development: {
-    client: 'pg',
+    client: "pg",
     useNullAsDefault: true,
     connection: {
       host: process.env.POSTGRESS_DEV_HOST,
       port: process.env.POSTGRESS_DEV_PORT,
       user: process.env.POSTGRESS_DEV_USER,
       password: process.env.POSTGRESS_DEV_PASSWORD,
-      database: process.env.POSTGRESS_DEV_DATABASE,
+      database: process.env.POSTGRESS_DEV_DATABASE
     },
-    migrations: { directory: '../data/migrations' },
-    seeds: { directory: '../data/seeds' },
+    migrations: {
+      directory: "../data/migrations"
+    },
+    seeds: {
+      directory: "../data/seeds"
+    }
   },
 
   test: {
