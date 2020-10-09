@@ -17,7 +17,7 @@ function findOrderById(id) {
 }
 
 function addOrder(order) {
-  return db('order')
+  return DB('order')
     .insert(order, 'id')
     .then((ids) => {
       return findById(ids[0]);

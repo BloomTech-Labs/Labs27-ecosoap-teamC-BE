@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const bcryptjs = require('bcryptjs');
 
 const Buyer = require('./buyerModel.js');
 
@@ -59,12 +58,10 @@ router.post('/:id/order', (req, res) => {
     .then((buyer) => {
       if (buyer) {
         Buyer.addOrder(orderData, id).then((order) => {
-          res
-            .status(201)
-            .json({
-              order,
-              message: "new order is added to the Buyer's buyer list",
-            });
+          res.status(201).json({
+            order,
+            message: "new order is added to the Buyer's buyer list",
+          });
         });
       } else {
         res

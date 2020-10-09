@@ -10,11 +10,11 @@ module.exports = {
 };
 
 function findBuyer() {
-  return db('buyer');
+  return DB('buyer');
 }
 
 function findBuyerById(id) {
-  return db('buyer').where({ id }).first();
+  return DB('buyer').where({ id }).first();
 }
 
 function findOrder(orderId) {
@@ -43,7 +43,7 @@ function findOrder(orderId) {
 }
 
 function addOrder(order, buyerId) {
-  return db('order')
+  return DB('order')
     .insert(order, buyerId)
     .then((ids) => {
       return findOrder(ids[0]);
