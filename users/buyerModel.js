@@ -5,8 +5,6 @@ module.exports = {
   findBuyerById,
   findOrder,
   addOrder,
-  updateOrder,
-  removeOrder,
 };
 
 function findBuyer() {

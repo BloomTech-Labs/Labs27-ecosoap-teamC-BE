@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
     })
     .catch((error) => {
       console.log(error);
-      res, status(500).json({ message: "Buyer's data can not be found" });
+      res.status(500).json({ message: "Buyer's data can not be found" });
     });
 });
 
@@ -70,6 +70,7 @@ router.post('/:id/order', (req, res) => {
       }
     })
     .catch((error) => {
+      console.log(error);
       res.status(500).json({ message: 'failed to post new order' });
     });
 });
