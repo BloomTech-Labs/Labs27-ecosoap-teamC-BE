@@ -49,7 +49,7 @@ router.get('/:id/orders', (req, res) => {
     });
 });
 
-router.post('/:id/order', (req, res) => {
+router.post('/:id/orders', (req, res) => {
   const orderData = req.body;
   const { id } = req.params;
   orderData.buyerId = id;
