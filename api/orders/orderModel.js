@@ -8,8 +8,12 @@ const getOrderById = async (id) => {
   return await db('orders').where({ id }).first();
 };
 
-const createOrder = async (order) => {
-  return db('orders').insert(order).returning('*');
+const createOrder = (order) => {
+  return db("orders")
+    .insert(order, "id")
+    .then((ids) => {
+      return getOrderById(ids[0]);
+    });
 };
 
 module.exports = {

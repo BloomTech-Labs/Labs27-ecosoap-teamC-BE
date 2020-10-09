@@ -32,7 +32,19 @@ router.get('/:id', function (req, res) {
 router.post('/', (req, res) => {
   const order = req.body;
   if (order) {
+  console.log('this is the order!!!',order)
+      Orders.createOrder(order)
+      .then(newOrder => {
+        res.status(200).json(newOrder)
+      })
+      .catch((err) => {
+        res.status(500).json({ error: "Error creating that order", err });
+      });
   } else {
     res.status(404).json({ message: 'Order missing' });
   }
 });
+
+
+
+module.exports = router;
