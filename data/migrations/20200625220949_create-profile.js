@@ -17,13 +17,13 @@ exports.up = (knex) => {
       table.string('country').notNullable();
     })
     .createTable('orders', function (table) {
-      table.uuid('id');
+      table.increments();
       table.string('organizationName').notNullable();
       table.string('organizationWebsite').notNullable();
       table.string('contactName').notNullable();
       table.integer('soapBarNum').notNullable();
-      table.integer('contactPhone').notNullable();
-      table.string('contactEmail').notNullable();
+      table.string('contactPhone').notNullable();
+      table.string('contactEmail', 320).notNullable();
       table.string('address');
       table.string('country').notNullable();
       table.integer('beneficiariesNum').notNullable();
