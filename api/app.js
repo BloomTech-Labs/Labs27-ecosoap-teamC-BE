@@ -9,6 +9,7 @@ const swaggerJSDoc = require('swagger-jsdoc');
 const jsdocConfig = require('../config/jsdoc');
 const dotenv = require('dotenv');
 const config_result = dotenv.config();
+
 if (process.env.NODE_ENV != 'production' && config_result.error) {
   throw config_result.error;
 }
@@ -20,8 +21,10 @@ const swaggerUIOptions = {
 
 //###[  Routers ]###
 const indexRouter = require('./index/indexRouter');
-const profileRouter = require('./profile/profileRouter');
 const orderRouter = require('./orders/orderRouter');
+
+// 27 & 28 added by PBS
+const buyerRouter = require('./users/buyerRouter.js');
 
 const app = express();
 
@@ -49,8 +52,10 @@ app.use(cookieParser());
 
 // application routes
 app.use('/', indexRouter);
-app.use(['/profile', '/profiles'], profileRouter);
 app.use('/order', orderRouter);
+
+// 59 & 60 added by PBS
+app.use('/api/buyers', buyerRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

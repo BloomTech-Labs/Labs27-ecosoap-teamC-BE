@@ -1,16 +1,16 @@
 const db = require('../../data/db-config');
 
 const getAllOrders = async () => {
-  return await db('orders');
+  return await db('order');
 };
 
 const getOrderById = async (id) => {
-  return await db('orders').where({ id }).first();
+  return await db('order').where({ id }).first();
 };
 
-const createOrder = (order) => {
-  return db("orders")
-    .insert(order, "id")
+const createOrder = (orderInfo) => {
+  return db('order')
+    .insert(orderInfo, 'id')
     .then((ids) => {
       return getOrderById(ids[0]);
     });
