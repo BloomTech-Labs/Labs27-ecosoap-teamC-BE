@@ -1,23 +1,24 @@
 const DB = require('../data/dbConfig.js');
 
 module.exports = {
-  postOrder,
+  findBuyer,
+  findBuyerById,
   findOrder,
-  findOrderById,
+  addOrder,
   updateOrder,
-  deleteOrder,
+  removeOrder,
 };
 
-function postOrder(order, buyerId) {
-  return DB('order')
-    .insert(order, buyerId)
-    .then((ids) => {
-      return findOrder(ids[0]);
-    });
+function findBuyer() {
+  return db('buyer');
+}
+
+function findBuyerById(id) {
+  return db('buyer').where({ id }).first();
 }
 
 function findOrder(orderId) {
-  return db('buyer as B')
+  return DB('buyer as B')
     .join('order as O', 'O.buyerId', 'B.id')
     .select(
       'O.id',
@@ -39,4 +40,12 @@ function findOrder(orderId) {
     )
     .where('B.id', orderId)
     .orderBy('O.id');
+}
+
+function addOrder(order, buyerId) {
+  return db('order')
+    .insert(order, buyerId)
+    .then((ids) => {
+      return findOrder(ids[0]);
+    });
 }

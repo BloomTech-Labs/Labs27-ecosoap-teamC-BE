@@ -9,6 +9,11 @@ const swaggerJSDoc = require('swagger-jsdoc');
 const jsdocConfig = require('../config/jsdoc');
 const dotenv = require('dotenv');
 const config_result = dotenv.config();
+
+// 14 & 15 added by PBS
+const buyerRouter = require('../users/buyerRouter.js');
+const orderRouter = require('../users/orderRouter.js');
+
 if (process.env.NODE_ENV != 'production' && config_result.error) {
   throw config_result.error;
 }
@@ -49,6 +54,10 @@ app.use(cookieParser());
 // application routes
 app.use('/', indexRouter);
 app.use(['/profile', '/profiles'], profileRouter);
+
+// 59 & 60 added by PBS
+app.use('/api/buyers', buyerRouter);
+app.use('/api/orders', orderRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
