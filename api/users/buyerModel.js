@@ -1,4 +1,4 @@
-// const DB = require('../data/dbConfig.js');
+const DB = require('../data/dbConfig.js');
 
 module.exports = {
   findBuyer,
