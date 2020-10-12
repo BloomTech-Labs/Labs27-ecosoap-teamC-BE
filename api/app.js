@@ -55,7 +55,7 @@ app.use('/', indexRouter);
 app.use('/order', orderRouter);
 
 // 59 & 60 added by PBS
-app.use('/api/buyers', buyerRouter);
+app.use('/buyer', buyerRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
