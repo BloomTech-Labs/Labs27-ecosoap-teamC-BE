@@ -52,7 +52,7 @@ app.use(cookieParser());
 
 // application routes
 app.use('/', indexRouter);
-app.use('/order', orderRouter);
+app.use('/orders', orderRouter);
 
 // 59 & 60 added by PBS
 app.use('/buyer', buyerRouter);

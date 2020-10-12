@@ -1,11 +1,11 @@
 exports.seed = function (knex) {
   // Deletes ALL existing entries
-  return knex('orders')
+  return knex('order')
     .del()
     .truncate()
     .then(function () {
       // Inserts seed entries
-      return knex('orders').insert([
+      return knex('order').insert([
         {
           organizationName: 'Nepal unicef',
           organizationWebsite: 'www.kathmandunepal.com',
