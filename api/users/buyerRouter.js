@@ -1,6 +1,21 @@
-const router = require('express').Router();
+const express = require('express');
+
+const router = express.Router();
 
 const Buyer = require('./buyerModel.js');
+
+router.post('/', (req, res) => {
+  const buyerData = req.body;
+
+  Buyer.add(buyerData)
+    .then((buyer) => {
+      res.status(200).json(buyer);
+    })
+    .then((error) => {
+      console.log(error);
+      res.status(500).json({ message: 'failed to create a new buyer' });
+    });
+});
 
 router.get('/', (req, res) => {
   Buyer.findBuyer()
@@ -49,7 +64,7 @@ router.get('/:id/orders', (req, res) => {
     });
 });
 
-router.post('/:id/order', (req, res) => {
+router.post('/:id/orders', (req, res) => {
   const orderData = req.body;
   const { id } = req.params;
   orderData.buyerId = id;

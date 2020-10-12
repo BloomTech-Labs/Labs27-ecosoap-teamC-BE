@@ -1,11 +1,20 @@
-const DB = require('../../data/db-config');
+const DB = require('../../data/db-config.js');
 
 module.exports = {
+  addBuyer,
   findBuyer,
   findBuyerById,
   findOrder,
   addOrder,
 };
+
+function addBuyer(buyer) {
+  return DB('buyer')
+    .insert(buyer, 'id')
+    .then((ids) => {
+      return findBuyerById(ids[0]);
+    });
+}
 
 function findBuyer() {
   return DB('buyer');

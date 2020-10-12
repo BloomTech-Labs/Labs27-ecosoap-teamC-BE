@@ -5,6 +5,7 @@ exports.up = (knex) => {
       table.string('email', 320).notNullable().unique();
       table.string('password').notNullable();
     })
+
     .createTable('buyer', function (table) {
       table.increments();
       table.string('email', 320).notNullable().unique();
@@ -12,10 +13,11 @@ exports.up = (knex) => {
       table.string('organizationName').notNullable();
       table.string('organizationWebsite').notNullable();
       table.string('contactName').notNullable();
-      table.integer('contactPhone').notNullable();
+      table.string('contactPhone').notNullable();
       table.string('address').notNullable();
       table.string('country').notNullable();
     })
+
     .createTable('order', function (table) {
       table.increments();
       table.string('organizationName').notNullable();
