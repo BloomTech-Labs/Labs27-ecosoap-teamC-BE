@@ -18,7 +18,7 @@ exports.up = (knex) => {
       table.string('country').notNullable();
     })
 
-    .createTable('orders', function (table) {
+    .createTable('order', function (table) {
       table.increments();
       table.string('organizationName').notNullable();
       table.string('organizationWebsite').notNullable();

@@ -16,7 +16,6 @@ exports.seed = function (knex) {
             contactPhone: 1234567890,
             address: "1234 king's st, Kathmandu",
             country: 'Nepal',
-            orderId: 1,
           },
           {
             email: 'phompenh@cambodia.com',
@@ -27,7 +26,6 @@ exports.seed = function (knex) {
             contactPhone: 9876543212,
             address: '95 st 286, Phnom Penh',
             country: 'Cambodia',
-            orderId: 2,
           },
           {
             email: 'nairobi@kenya.com',
@@ -38,7 +36,6 @@ exports.seed = function (knex) {
             contactPhone: 9087654323,
             address: '5 upper hill Rd, Nairobi',
             country: 'Kenya',
-            orderId: 3,
           },
           {
             email: 'capetown@southafrica.com',
@@ -49,7 +46,6 @@ exports.seed = function (knex) {
             contactPhone: 4893546738,
             address: '62 Newmarket St, Foreshore, Cape Town',
             country: 'South Africa',
-            orderId: 4,
           },
           {
             email: 'dodoma@tanzania.com',
@@ -60,7 +56,6 @@ exports.seed = function (knex) {
             contactPhone: 5568974123,
             address: '89 Mwangaza ave, Dodoma',
             country: 'Tanzania',
-            orderId: 5,
           },
         ]);
       })
