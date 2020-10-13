@@ -31,7 +31,7 @@ router.get('/:id', function (req, res) {
 
 router.post('/', validateOrder, (req, res) => {
   const order = req.body;
-  console.log(order)
+
   Orders.createOrder(order)
     .then((newOrder) => {
       res.status(200).json(newOrder);
@@ -41,6 +41,22 @@ router.post('/', validateOrder, (req, res) => {
     });
   
 });
+
+router.delete("/:id", (req,res) =>{
+  Orders.deleteOrder(req.params.id)
+    .then((order) => {
+      if (order) {
+        res.status(200).json({ deleted: order });
+      } else {
+        res
+          .status(404)
+          .json({ message: "Couldn't find an order with that ID" });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({ error: "error deleting that order", err });
+    });
+})
 
 // -----------------  custom middleware   ----------------------------
 
