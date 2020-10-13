@@ -73,6 +73,7 @@ router.post('/:id/orders', (req, res) => {
 
   if (orderData) {
     Buyer.addOrder(orderData).then((order) => {
+      console.log(order);
       res.status(201).json({
         orderData,
         message: "new order is added to the Buyer's buyer list",
