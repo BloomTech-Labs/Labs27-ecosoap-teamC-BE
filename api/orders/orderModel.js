@@ -28,9 +28,19 @@ const deleteOrder = (id) => {
   })
 }
 
+function editOrder(changes, id) {
+  return db("order")
+    .update(changes)
+    .where({ id })
+    .then(() => {
+      return getOrderById(id);
+    });
+}
+
 module.exports = {
   getAllOrders,
   getOrderById,
   createOrder,
-  deleteOrder
+  deleteOrder,
+  editOrder
 };

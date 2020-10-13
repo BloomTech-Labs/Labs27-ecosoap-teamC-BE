@@ -3,6 +3,7 @@ const express = require('express');
 const Orders = require('./orderModel');
 const router = express.Router();
 
+// GET all orders
 router.get('/', function (req, res) {
   Orders.getAllOrders()
     .then((orders) => {
@@ -14,6 +15,7 @@ router.get('/', function (req, res) {
     });
 });
 
+// GET specific order by id
 router.get('/:id', function (req, res) {
   const id = String(req.params.id);
   Orders.getOrderById(id)
@@ -29,6 +31,7 @@ router.get('/:id', function (req, res) {
     });
 });
 
+// POST order
 router.post('/', validateOrder, (req, res) => {
   const order = req.body;
 
@@ -42,6 +45,7 @@ router.post('/', validateOrder, (req, res) => {
   
 });
 
+// DELETE order by id
 router.delete("/:id", (req,res) =>{
   Orders.deleteOrder(req.params.id)
     .then((order) => {
@@ -57,6 +61,9 @@ router.delete("/:id", (req,res) =>{
       res.status(500).json({ error: "error deleting that order", err });
     });
 })
+
+// EDIT order by id
+
 
 // -----------------  custom middleware   ----------------------------
 
