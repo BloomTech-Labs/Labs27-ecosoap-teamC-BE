@@ -24,9 +24,17 @@ function findBuyerById(id) {
   return DB('buyer').where({ id }).first();
 }
 
-function findOrder(orderId) {
+function addOrder(order) {
+  return DB('order')
+    .insert(order, 'id')
+    .then((ids) => {
+      return findOrder(ids[0]);
+    });
+}
+
+function findOrder(buyerId) {
   return DB('buyer as B')
-    .join('order as O', 'O.buyerId', 'B.id')
+    .join('order as O', 'O.buyerId', '=', 'B.id')
     .select(
       'O.id',
       'B.contactName',
@@ -45,14 +53,6 @@ function findOrder(orderId) {
       'O.hygieneInitiative',
       'O.comments'
     )
-    .where('B.id', orderId)
+    .where('B.id', buyerId)
     .orderBy('O.id');
-}
-
-function addOrder(order, buyerId) {
-  return DB('order')
-    .insert(order, buyerId)
-    .then((ids) => {
-      return findOrder(ids[0]);
-    });
 }

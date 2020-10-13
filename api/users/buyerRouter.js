@@ -7,7 +7,7 @@ const Buyer = require('./buyerModel.js');
 router.post('/', (req, res) => {
   const buyerData = req.body;
 
-  Buyer.add(buyerData)
+  Buyer.addBuyer(buyerData)
     .then((buyer) => {
       res.status(200).json(buyer);
     })
@@ -51,11 +51,13 @@ router.get('/:id/orders', (req, res) => {
   Buyer.findOrder(id)
     .then((buyer) => {
       if (buyer.length) {
-        res.status(200).json({ buyer, message: 'you found the buyer' });
+        res
+          .status(200)
+          .json({ buyer, message: 'you found the order for this buyer' });
       } else {
         res
           .status(404)
-          .json({ message: 'Could not find buyer with given buyer ID ' });
+          .json({ message: 'Could not find orders with given buyer ID ' });
       }
     })
     .catch((error) => {
@@ -66,28 +68,22 @@ router.get('/:id/orders', (req, res) => {
 
 router.post('/:id/orders', (req, res) => {
   const orderData = req.body;
-  const { id } = req.params;
-  orderData.buyerId = id;
+  // const { id } = req.params;
+  // orderData.buyerId = id;
 
-  Buyer.findBuyerById(id)
-    .then((buyer) => {
-      if (buyer) {
-        Buyer.addOrder(orderData, id).then((order) => {
-          res.status(201).json({
-            order,
-            message: "new order is added to the Buyer's buyer list",
-          });
-        });
-      } else {
-        res
-          .status(404)
-          .json({ message: "could not find orders with given buyer's id" });
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-      res.status(500).json({ message: 'failed to post new order' });
+  if (orderData) {
+    Buyer.addOrder(orderData).then((order) => {
+      console.log(order);
+      res.status(201).json({
+        orderData,
+        message: "new order is added to the Buyer's buyer list",
+      });
     });
+  } else {
+    res
+      .status(404)
+      .json({ message: "could not post order for given buyer's id" });
+  }
 });
 
 module.exports = router;

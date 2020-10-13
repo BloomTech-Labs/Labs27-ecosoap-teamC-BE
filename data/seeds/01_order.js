@@ -19,6 +19,7 @@ exports.seed = function (knex) {
           hygieneSituation: 'Excellent',
           hygieneInitiative: 'distribution of soap in rural villages',
           comments: 'No Comment',
+          buyerId: 1,
         },
         {
           organizationName: 'Cambodia unicef',
@@ -33,6 +34,7 @@ exports.seed = function (knex) {
           hygieneSituation: 'Excellent',
           hygieneInitiative: 'distribution of soap in rural villages',
           comments: 'No Comment',
+          buyerId: 2,
         },
         {
           organizationName: 'Kenya unicef',
