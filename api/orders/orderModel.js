@@ -9,6 +9,7 @@ const getOrderById = async (id) => {
 };
 
 const createOrder = (orderInfo) => {
+  
   return db('order')
     .insert(orderInfo, 'id')
     .then((ids) => {
