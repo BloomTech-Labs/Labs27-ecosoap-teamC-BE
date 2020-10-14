@@ -98,8 +98,6 @@ const router = express.Router();
  *                  buyerId: null
  */
 
-
-
 // GET all orders
 router.get('/', function (req, res) {
   Orders.getAllOrders()
@@ -142,10 +140,8 @@ router.get('/', function (req, res) {
  *          application/json:
  *            schema:
  *              $ref: '#/components/schemas/Order'
- *      401:
- *        $ref: '#/components/responses/UnauthorizedError'
  *      404:
- *        description: 'Profile not found'
+ *        description: 'Order not found'
  */
 
 // GET specific order by id
@@ -163,6 +159,43 @@ router.get('/:id', function (req, res) {
       res.status(500).json({ error: err.message });
     });
 });
+
+/**
+ * @swagger
+ * /orders:
+ *  post:
+ *    summary: Add a order
+ *    security:
+ *      - okta: []
+ *    tags:
+ *      - order
+ *    requestBody:
+ *      description: Order object to to be added
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/Order'
+ *    responses:
+ *      400:
+ *        $ref: '#/components/responses/BadRequest'
+ *      401:
+ *        $ref: '#/components/responses/UnauthorizedError'
+ *      404:
+ *        description: 'Order not found'
+ *      200:
+ *        description: A order object
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                message:
+ *                  type: string
+ *                  description: A message about the result
+ *                  example: order created
+ *                order:
+ *                  $ref: '#/components/schemas/Order'
+ */
 
 // POST order
 router.post('/', validateOrder, (req, res) => {
