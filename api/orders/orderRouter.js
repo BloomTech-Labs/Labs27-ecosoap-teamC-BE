@@ -152,7 +152,7 @@ router.get('/:id', function (req, res) {
       if (order) {
         res.status(200).json(order);
       } else {
-        res.status(404).json({ error: 'OrderNotFound' });
+        res.status(404).json({ error: 'Order Not Found' });
       }
     })
     .catch((err) => {
@@ -211,6 +211,38 @@ router.post('/', validateOrder, (req, res) => {
   
 });
 
+
+/**
+ * @swagger
+ * /order/{id}:
+ *  delete:
+ *    summary: Remove a order
+ *    security:
+ *      - okta: []
+ *    tags:
+ *      - order
+ *    parameters:
+ *      - $ref: '#/components/parameters/orderId'
+ *    responses:
+ *      401:
+ *        $ref: '#/components/responses/UnauthorizedError'
+ *      404:
+ *        $ref: '#/components/responses/NotFound'
+ *      200:
+ *        description: A order object
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                message:
+ *                  type: string
+ *                  description: A message about the result
+ *                  example: order 55 was deleted.
+ *                profile:
+ *                  $ref: '#/components/schemas/Order'
+ */
+
 // DELETE order by id
 router.delete("/:id", (req,res) =>{
   Orders.deleteOrder(req.params.id)
@@ -220,13 +252,49 @@ router.delete("/:id", (req,res) =>{
       } else {
         res
           .status(404)
-          .json({ message: "Couldn't find an order with that ID" });
+          .json({ message: "Order Not Found" });
       }
     })
     .catch((err) => {
       res.status(500).json({ error: "error deleting that order", err });
     });
 })
+
+
+/**
+ * @swagger
+ * /orders:
+ *  put:
+ *    summary: Update a order
+ *    security:
+ *      - okta: []
+ *    tags:
+ *      - order
+ *    requestBody:
+ *      description: Order object to to be updated
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/Order'
+ *    responses:
+ *      401:
+ *        $ref: '#/components/responses/UnauthorizedError'
+ *      404:
+ *        $ref: '#/components/responses/NotFound'
+ *      200:
+ *        description: A order object
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                message:
+ *                  type: string
+ *                  description: A message about the result
+ *                  example: order created
+ *                profile:
+ *                  $ref: '#/components/schemas/Order'
+ */
 
 // EDIT order by id
 router.put("/:id", validateOrder, (req, res) => {
@@ -243,7 +311,7 @@ router.put("/:id", validateOrder, (req, res) => {
       } else {
         res
           .status(404)
-          .json({ message: "couldn't find an order with that ID" });
+          .json({ message: "Order Not Found" });
       }
     })
     .catch((err) => {
