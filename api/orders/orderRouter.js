@@ -3,6 +3,91 @@ const express = require('express');
 const Orders = require('./orderModel');
 const router = express.Router();
 
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *    Order:
+ *      type: object
+ *      required:
+ *        - organizationName
+ *        - organizationWebsite
+ *        - contactName
+ *        - soapBarNum
+ *        - contactPhone
+ *        - contactEmail
+ *        - country
+ *        - beneficiariesNum
+ *        - hygieneInitiative
+ *      properties:
+ *        organizationName:
+ *          type: string
+ *        organizationWebsite:
+ *          type: string
+ *        contactName:
+ *          type: string
+ *        soapBarNum:
+ *          type: integer
+ *        contactPhone:
+ *          type: string
+ *        contactEmail:
+ *          type: string
+ *          description: Maximum 320 characters
+ *        address:
+ *          type: string
+ *        country:
+ *          type: string
+ *        beneficiariesNum:
+ *          type: integer
+ *        hygieneSituation:
+ *          type: string
+ *        hygieneInitiative:
+ *          type: string
+ *        comments:
+ *          type: string
+ *        buyerId:
+ *          type: integer
+ *      example:
+ *        organizationName: '00uhjfrwdWAQvD8JV4x6'
+ *        organizationWebsite: 'frank@example.com'
+ *        name: 'Frank Martinez'
+ *        avatarUrl: 'https://s3.amazonaws.com/uifaces/faces/twitter/hermanobrother/128.jpg'
+ *
+ * /orders:
+ *  get:
+ *    description: Returns a list of orders
+ *    summary: Get a list of all orders
+ *    security:
+ *      - okta: []
+ *    tags:
+ *      - order
+ *    responses:
+ *      200:
+ *        description: array of orders
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: array
+ *              items:
+ *                $ref: '#/components/schemas/Profile'
+ *              example:
+ *                - organizationName: "test"
+ *                  organizationWebsite: "www.testorganization.com"
+ *                  contactName: "test contact"
+ *                  soapBarNum: 10
+ *                  contactPhone: "5555555555"
+ *                  contactEmail: "contact@test.com"
+ *                  address: null
+ *                  country: "USA"
+ *                  beneficiariesNum: 180
+ *                  hygieneSituation: "Excellent"
+ *                  hygieneInitiative: "distribution of soap in rural villages"
+ *                  comments: "No Comment"
+ *                  buyerId: null
+ */
+
+
+
 // GET all orders
 router.get('/', function (req, res) {
   Orders.getAllOrders()
@@ -63,7 +148,27 @@ router.delete("/:id", (req,res) =>{
 })
 
 // EDIT order by id
-
+router.put("/:id", validateOrder, (req, res) => {
+  Orders.getOrderById(req.params.id)
+    .then((order) => {
+      if (order) {
+        Orders.editOrder(req.body, req.params.id)
+          .then((update) => {
+            res.status(200).json(update);
+          })
+          .catch((err) => {
+            res.status(500).json({ error: "error updating that order", err });
+          });
+      } else {
+        res
+          .status(404)
+          .json({ message: "couldn't find an order with that ID" });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({ error: "issue editing that order", err });
+    });
+});
 
 // -----------------  custom middleware   ----------------------------
 
@@ -84,5 +189,6 @@ function validateOrder(req, res, next){
     res.status(404).json({ message: 'Order missing' });
   }
 }
+
 
 module.exports = router;
