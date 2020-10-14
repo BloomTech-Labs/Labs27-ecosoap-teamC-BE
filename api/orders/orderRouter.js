@@ -11,7 +11,6 @@ const router = express.Router();
  *      type: object
  *      required:
  *        - organizationName
- *        - organizationWebsite
  *        - contactName
  *        - soapBarNum
  *        - contactPhone
