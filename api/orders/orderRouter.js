@@ -208,9 +208,7 @@ router.post('/', validateOrder, (req, res) => {
     .catch((err) => {
       res.status(500).json({ error: 'Error creating that order', err });
     });
-  
 });
-
 
 /**
  * @swagger
@@ -244,22 +242,19 @@ router.post('/', validateOrder, (req, res) => {
  */
 
 // DELETE order by id
-router.delete("/:id", (req,res) =>{
+router.delete('/:id', (req, res) => {
   Orders.deleteOrder(req.params.id)
     .then((order) => {
       if (order) {
         res.status(200).json({ deleted: order });
       } else {
-        res
-          .status(404)
-          .json({ message: "Order Not Found" });
+        res.status(404).json({ message: 'Order Not Found' });
       }
     })
     .catch((err) => {
-      res.status(500).json({ error: "error deleting that order", err });
+      res.status(500).json({ error: 'error deleting that order', err });
     });
-})
-
+});
 
 /**
  * @swagger
@@ -297,7 +292,7 @@ router.delete("/:id", (req,res) =>{
  */
 
 // EDIT order by id
-router.put("/:id", validateOrder, (req, res) => {
+router.put('/:id', validateOrder, (req, res) => {
   Orders.getOrderById(req.params.id)
     .then((order) => {
       if (order) {
@@ -306,38 +301,48 @@ router.put("/:id", validateOrder, (req, res) => {
             res.status(200).json(update);
           })
           .catch((err) => {
-            res.status(500).json({ error: "error updating that order", err });
+            res.status(500).json({ error: 'error updating that order', err });
           });
       } else {
-        res
-          .status(404)
-          .json({ message: "Order Not Found" });
+        res.status(404).json({ message: 'Order Not Found' });
       }
     })
     .catch((err) => {
-      res.status(500).json({ error: "issue editing that order", err });
+      res.status(500).json({ error: 'issue editing that order', err });
     });
 });
 
 // -----------------  custom middleware   ----------------------------
 
-function validateOrder(req, res, next){
+function validateOrder(req, res, next) {
   const order = req.body;
 
-  if(order){
-    if(order.contactEmail && order.contactEmail.length < 321){
-      if(order.organizationName && order.organizationWebsite && order.contactName && order.soapBarNum && order.contactPhone && order.country && order.beneficiariesNum && order.hygieneInitiative){
-        next()
-      }else{
-        res.status(404).json({ message: 'Please provide required information' });
+  if (order) {
+    if (order.contactEmail && order.contactEmail.length < 321) {
+      if (
+        order.organizationName &&
+        order.organizationWebsite &&
+        order.contactName &&
+        order.soapBarNum &&
+        order.contactPhone &&
+        order.country &&
+        order.beneficiariesNum &&
+        order.hygieneInitiative
+      ) {
+        next();
+      } else {
+        res
+          .status(404)
+          .json({ message: 'Please provide required information' });
       }
-    }else{
-      res.status(404).json({ message: 'Email is required and max 320 characters' });
+    } else {
+      res
+        .status(404)
+        .json({ message: 'Email is required and max 320 characters' });
     }
-  }else {
+  } else {
     res.status(404).json({ message: 'Order missing' });
   }
 }
-
 
 module.exports = router;
