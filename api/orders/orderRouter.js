@@ -48,10 +48,22 @@ const router = express.Router();
  *        buyerId:
  *          type: integer
  *      example:
- *        organizationName: '00uhjfrwdWAQvD8JV4x6'
- *        organizationWebsite: 'frank@example.com'
- *        name: 'Frank Martinez'
- *        avatarUrl: 'https://s3.amazonaws.com/uifaces/faces/twitter/hermanobrother/128.jpg'
+ *        id: 55
+ *        organizationName: 'test'
+ *        organizationWebsite: 'test@example.com'
+ *        contactName: "test"
+ *        soapBarNum: 2
+ *        contactPhone: "5555555555"
+ *        contactEmail: "contact@test.com"
+ *        address: null
+ *        country: "USA"
+ *        beneficiariesNum: 2
+ *        hygieneSituation: null
+ *        hygieneInitiative: "test"
+ *        comments: null
+ *        created_at: "2020-10-13T21:56:51.877Z"
+ *        updated_at: "2020-10-13T21:56:51.877Z"
+ *        buyerId: null
  *
  * /orders:
  *  get:
@@ -69,7 +81,7 @@ const router = express.Router();
  *            schema:
  *              type: array
  *              items:
- *                $ref: '#/components/schemas/Profile'
+ *                $ref: '#/components/schemas/Order'
  *              example:
  *                - organizationName: "test"
  *                  organizationWebsite: "www.testorganization.com"
@@ -80,9 +92,9 @@ const router = express.Router();
  *                  address: null
  *                  country: "USA"
  *                  beneficiariesNum: 180
- *                  hygieneSituation: "Excellent"
+ *                  hygieneSituation: null
  *                  hygieneInitiative: "distribution of soap in rural villages"
- *                  comments: "No Comment"
+ *                  comments: null
  *                  buyerId: null
  */
 
@@ -99,6 +111,42 @@ router.get('/', function (req, res) {
       res.status(500).json({ message: err.message });
     });
 });
+
+/**
+ * @swagger
+ * components:
+ *  parameters:
+ *    orderId:
+ *      name: id
+ *      in: path
+ *      description: ID of the order to return
+ *      required: true
+ *      example: 55
+ *      schema:
+ *        type: integer
+ *
+ * /orders/{id}:
+ *  get:
+ *    description: Find orders by ID
+ *    summary: Returns a single order
+ *    security:
+ *      - okta: []
+ *    tags:
+ *      - order
+ *    parameters:
+ *      - $ref: '#/components/parameters/orderId'
+ *    responses:
+ *      200:
+ *        description: A order object
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Order'
+ *      401:
+ *        $ref: '#/components/responses/UnauthorizedError'
+ *      404:
+ *        description: 'Profile not found'
+ */
 
 // GET specific order by id
 router.get('/:id', function (req, res) {
