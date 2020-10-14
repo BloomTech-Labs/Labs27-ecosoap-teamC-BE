@@ -321,7 +321,6 @@ function validateOrder(req, res, next) {
     if (order.contactEmail && order.contactEmail.length < 321) {
       if (
         order.organizationName &&
-        order.organizationWebsite &&
         order.contactName &&
         order.soapBarNum &&
         order.contactPhone &&
