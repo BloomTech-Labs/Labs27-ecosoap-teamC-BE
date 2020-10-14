@@ -16,8 +16,30 @@ const createOrder = (orderInfo) => {
     });
 };
 
+const deleteOrder = (id) => {
+  return getOrderById(id).then((del) => {
+    return db('order')
+      .where({ id })
+      .del()
+      .then(() => {
+        return del;
+      });
+  });
+};
+
+function editOrder(changes, id) {
+  return db('order')
+    .update(changes)
+    .where({ id })
+    .then(() => {
+      return getOrderById(id);
+    });
+}
+
 module.exports = {
   getAllOrders,
   getOrderById,
   createOrder,
+  deleteOrder,
+  editOrder,
 };
