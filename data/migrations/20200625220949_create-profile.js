@@ -21,7 +21,7 @@ exports.up = (knex) => {
     .createTable('order', function (table) {
       table.increments();
       table.string('organizationName').notNullable();
-      table.string('organizationWebsite').notNullable();
+      table.string('organizationWebsite');
       table.string('contactName').notNullable();
       table.integer('soapBarNum').notNullable();
       table.string('contactPhone').notNullable();

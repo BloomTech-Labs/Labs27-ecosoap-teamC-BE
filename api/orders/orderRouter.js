@@ -1,3 +1,4 @@
+const { request, gql } = require('graphql-request');
 const express = require('express');
 // const authRequired = require('../middleware/authRequired');
 const Orders = require('./orderModel');
@@ -344,5 +345,54 @@ function validateOrder(req, res, next) {
     res.status(404).json({ message: 'Order missing' });
   }
 }
+
+const stripe = require('stripe')(
+  'sk_test_51HbTxLIV3JLVItGF2ghcMtqxdK9urLhXxtRXwqKCyzLIBmyBclBaBwgXrVMNEH2s6u2NMs2k4jmVEk9s6ZRgJkdV00j6tKBdMk'
+);
+
+router.post('/qualify', (req, res) => {
+  const {
+    email,
+    amount,
+    organizationName,
+    beneficiaries,
+    country,
+    contactName,
+  } = req.body;
+
+  const query = gql`
+    query {
+      checkIfPrice(input: {
+        organizationName: "${organizationName}"
+        contactName: "${contactName}"
+        barsRequested: ${amount}
+        contactEmailAddress: "${email}"
+        country: "${country}"
+        beneficiaries: ${beneficiaries}
+      }) {
+        hasPrice
+        price
+      }
+    }
+  `;
+  request('http://35.208.9.187:9193/web-api-3', query).then((data) =>
+    res.json(data)
+  );
+});
+router.post('/pay', async (req, res) => {
+  console.log(req.body);
+  const email = req.body.email;
+  const amount = req.body.amount;
+
+  const paymentIntent = await stripe.paymentIntents.create({
+    amount: amount,
+    currency: 'USD',
+    payment_method: req.body.id,
+    metadata: { integration_check: 'accept_a_payment' },
+    receipt_email: email,
+  });
+  console.log(paymentIntent);
+  res.json({ client_secret: paymentIntent['client_secret'] });
+});
 
 module.exports = router;
