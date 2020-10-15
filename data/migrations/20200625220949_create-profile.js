@@ -20,6 +20,7 @@ exports.up = (knex) => {
 
     .createTable('order', function (table) {
       table.increments();
+      table.string('paymentID').notNullable();
       table.string('organizationName').notNullable();
       table.string('organizationWebsite');
       table.string('contactName').notNullable();
@@ -46,6 +47,6 @@ exports.up = (knex) => {
 exports.down = (knex) => {
   return knex.schema
     .dropTableIfExists('order')
-    .dropTableIfExists('buyer')
-    .dropTableIfExists('administrator');
+    .dropTableIfExists('administrator')
+    .dropTableIfExists('buyer');
 };
