@@ -351,7 +351,7 @@ const stripe = require('stripe')(
 );
 
 router.post('/qualify', (req, res) => {
-  console.log(req.body)
+  console.log(req.body);
   const {
     contactEmail,
     soapBarNum,
@@ -381,7 +381,7 @@ router.post('/qualify', (req, res) => {
   );
 });
 router.post('/pay', async (req, res) => {
-  console.log(req.body)
+  console.log(req.body);
   const {
     contactEmail,
     soapBarNum,
@@ -407,20 +407,20 @@ router.post('/pay', async (req, res) => {
     }
   `;
   request('http://35.208.9.187:9193/web-api-3', query).then(async (data) => {
-    console.log(data.checkIfPrice.hasPrice)
+    console.log(data.checkIfPrice.hasPrice);
 
-    if(data.checkIfPrice.hasPrice){
+    if (data.checkIfPrice.hasPrice) {
       const paymentIntent = await stripe.paymentIntents.create({
         amount: data.checkIfPrice.price,
         currency: 'USD',
         payment_method: req.body.id,
         metadata: { integration_check: 'accept_a_payment' },
-        receipt_email: email,
+        receipt_email: contactEmail,
       });
-      console.log(paymentIntent)
+      console.log(paymentIntent);
       res.json({ client_secret: paymentIntent['client_secret'] });
     }
-  })
+  });
 });
 
 module.exports = router;
