@@ -452,6 +452,8 @@ router.post('/pay', async (req, res) => {
           console.log(err);
         });
       res.json({ client_secret: paymentIntent['client_secret'] });
+    } else {
+      res.status(666).json({ error: "Franks demonic api has stopped you." })
     }
   });
 });
