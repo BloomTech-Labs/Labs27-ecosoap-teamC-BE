@@ -353,8 +353,8 @@ const stripe = require('stripe')(process.env.STRIPE_SK);
 console.log(`STRIPE Key Loaded: \n${process.env.STRIPE_SK}`);
 
 router.post('/qualify', (req, res) => {
-  console.log("Qualify Endpoint \n", req.body);
-  
+  console.log('Qualify Endpoint \n', req.body);
+
   const {
     contactEmail,
     soapBarNum,
@@ -443,13 +443,13 @@ router.post('/pay', async (req, res) => {
         hygieneInitiative: hygieneInitiative,
         comments: comments,
         buyerId: buyerId,
-      }
+      };
       Orders.createOrder(orderToBeMade)
         .then((newOrder) => {
-          console.log("new order made: ", newOrder);
+          console.log('new order made: ', newOrder);
         })
         .catch((err) => {
-          console.log(err)
+          console.log(err);
         });
       res.json({ client_secret: paymentIntent['client_secret'] });
     }
