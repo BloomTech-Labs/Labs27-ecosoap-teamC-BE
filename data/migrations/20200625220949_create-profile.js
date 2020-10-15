@@ -20,7 +20,7 @@ exports.up = (knex) => {
 
     .createTable('order', function (table) {
       table.increments();
-      table.string('paymentID')
+      table.string('paymentID');
       table.string('organizationName').notNullable();
       table.string('organizationWebsite');
       table.string('contactName').notNullable();
