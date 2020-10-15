@@ -1,3 +1,6 @@
+var dotenv = require('dotenv');
+dotenv.config({ path: '../../.env' });
+
 const { request, gql } = require('graphql-request');
 const express = require('express');
 // const authRequired = require('../middleware/authRequired');
@@ -344,12 +347,12 @@ function validateOrder(req, res, next) {
   }
 }
 
-const stripe = require('stripe')(
-  'sk_test_51HbTxLIV3JLVItGF2ghcMtqxdK9urLhXxtRXwqKCyzLIBmyBclBaBwgXrVMNEH2s6u2NMs2k4jmVEk9s6ZRgJkdV00j6tKBdMk'
-);
+const stripe = require('stripe')(process.env.STRIPE_SK);
+console.log(`STRIPE Key Loaded: \n${process.env.STRIPE_SK}`);
 
 router.post('/qualify', (req, res) => {
-  console.log(req.body);
+  console.log('Qualify Endpoint \n', req.body);
+
   const {
     contactEmail,
     soapBarNum,
@@ -379,11 +382,18 @@ router.post('/qualify', (req, res) => {
   );
 });
 router.post('/pay', async (req, res) => {
-  console.log(req.body);
+  console.log(`Incoming Order: `, req.body);
   const {
     contactEmail,
     soapBarNum,
     organizationName,
+    organizationWebsite,
+    contactPhone,
+    address,
+    hygieneInitiative,
+    hygieneSituation,
+    comments,
+    buyerId,
     beneficiariesNum,
     country,
     contactName,
@@ -405,7 +415,7 @@ router.post('/pay', async (req, res) => {
     }
   `;
   request('http://35.208.9.187:9193/web-api-3', query).then(async (data) => {
-    console.log(data.checkIfPrice.hasPrice);
+    console.log(`INCOMING ORDER QUALIFIES: ${data.checkIfPrice.hasPrice}`);
 
     if (data.checkIfPrice.hasPrice) {
       const paymentIntent = await stripe.paymentIntents.create({
@@ -415,7 +425,30 @@ router.post('/pay', async (req, res) => {
         metadata: { integration_check: 'accept_a_payment' },
         receipt_email: contactEmail,
       });
-      console.log(paymentIntent);
+      console.log(`THIS IS THE PAYMENT INTENT: \n`, paymentIntent);
+      const orderToBeMade = {
+        paymentID: req.body.id,
+        organizationName: organizationName,
+        organizationWebsite: organizationWebsite,
+        contactName: contactName,
+        soapBarNum: soapBarNum,
+        contactPhone: contactPhone,
+        contactEmail: contactEmail,
+        address: address,
+        country: country,
+        beneficiariesNum: beneficiariesNum,
+        hygieneSituation: hygieneSituation,
+        hygieneInitiative: hygieneInitiative,
+        comments: comments,
+        buyerId: buyerId,
+      };
+      Orders.createOrder(orderToBeMade)
+        .then((newOrder) => {
+          console.log('new order made: ', newOrder);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
       res.json({ client_secret: paymentIntent['client_secret'] });
     }
   });
