@@ -351,11 +351,12 @@ const stripe = require('stripe')(
 );
 
 router.post('/qualify', (req, res) => {
+  console.log(req.body)
   const {
-    email,
-    amount,
+    contactEmail,
+    soapBarNum,
     organizationName,
-    beneficiaries,
+    beneficiariesNum,
     country,
     contactName,
   } = req.body;
@@ -365,10 +366,10 @@ router.post('/qualify', (req, res) => {
       checkIfPrice(input: {
         organizationName: "${organizationName}"
         contactName: "${contactName}"
-        barsRequested: ${amount}
-        contactEmailAddress: "${email}"
+        barsRequested: ${soapBarNum}
+        contactEmailAddress: "${contactEmail}"
         country: "${country}"
-        beneficiaries: ${beneficiaries}
+        beneficiaries: ${beneficiariesNum}
       }) {
         hasPrice
         price
@@ -380,19 +381,46 @@ router.post('/qualify', (req, res) => {
   );
 });
 router.post('/pay', async (req, res) => {
-  console.log(req.body);
-  const email = req.body.email;
-  const amount = req.body.amount;
+  console.log(req.body)
+  const {
+    contactEmail,
+    soapBarNum,
+    organizationName,
+    beneficiariesNum,
+    country,
+    contactName,
+  } = req.body;
 
-  const paymentIntent = await stripe.paymentIntents.create({
-    amount: amount,
-    currency: 'USD',
-    payment_method: req.body.id,
-    metadata: { integration_check: 'accept_a_payment' },
-    receipt_email: email,
-  });
-  console.log(paymentIntent);
-  res.json({ client_secret: paymentIntent['client_secret'] });
+  const query = gql`
+    query {
+      checkIfPrice(input: {
+        organizationName: "${organizationName}"
+        contactName: "${contactName}"
+        barsRequested: ${soapBarNum}
+        contactEmailAddress: "${contactEmail}"
+        country: "${country}"
+        beneficiaries: ${beneficiariesNum}
+      }) {
+        hasPrice
+        price
+      }
+    }
+  `;
+  request('http://35.208.9.187:9193/web-api-3', query).then(async (data) => {
+    console.log(data.checkIfPrice.hasPrice)
+
+    if(data.checkIfPrice.hasPrice){
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount: data.checkIfPrice.price,
+        currency: 'USD',
+        payment_method: req.body.id,
+        metadata: { integration_check: 'accept_a_payment' },
+        receipt_email: email,
+      });
+      console.log(paymentIntent)
+      res.json({ client_secret: paymentIntent['client_secret'] });
+    }
+  })
 });
 
 module.exports = router;
