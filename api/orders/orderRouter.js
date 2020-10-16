@@ -352,7 +352,7 @@ function validateOrder(req, res, next) {
 
 const stripe = require('stripe')(process.env.STRIPE_SK);
 console.log(`STRIPE Key Loaded: \n${process.env.STRIPE_SK}`);
-let qualifications = {}
+let qualifications = {};
 router.post('/qualify', (req, res) => {
   console.log('Qualify Endpoint \n', req.body);
 
@@ -380,18 +380,17 @@ router.post('/qualify', (req, res) => {
       }
     }
   `;
-  request('http://35.208.9.187:9193/web-api-3', query).then((data) =>{
-    
-    if(data.checkIfPrice.hasPrice){
+  request('http://35.208.9.187:9193/web-api-3', query).then((data) => {
+    if (data.checkIfPrice.hasPrice) {
       let qID = uuidv4();
-      
-      qualifications[qID] = data.checkIfPrice.price
+
+      qualifications[qID] = data.checkIfPrice.price;
       res.status(200).json({
         price: data.checkIfPrice.price,
-        qID: qID
-      })
-    }else{
-      res.json({ qualificationStatus: "FAILED"})
+        qID: qID,
+      });
+    } else {
+      res.json({ qualificationStatus: 'FAILED' });
     }
   });
 });
@@ -414,43 +413,43 @@ router.post('/pay', async (req, res) => {
     contactName,
   } = req.body;
 
-    if (qualifications[qID]) {
-      const paymentIntent = await stripe.paymentIntents.create({
-        amount: qualifications[qID],
-        currency: 'USD',
-        payment_method: req.body.id,
-        metadata: { integration_check: 'accept_a_payment' },
-        receipt_email: contactEmail,
+  if (qualifications[qID]) {
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: qualifications[qID],
+      currency: 'USD',
+      payment_method: req.body.id,
+      metadata: { integration_check: 'accept_a_payment' },
+      receipt_email: contactEmail,
+    });
+    console.log(`THIS IS THE PAYMENT INTENT: \n`, paymentIntent);
+    const orderToBeMade = {
+      paymentID: req.body.id,
+      organizationName: organizationName,
+      organizationWebsite: organizationWebsite,
+      contactName: contactName,
+      soapBarNum: soapBarNum,
+      contactPhone: contactPhone,
+      contactEmail: contactEmail,
+      address: address,
+      country: country,
+      beneficiariesNum: beneficiariesNum,
+      hygieneSituation: hygieneSituation,
+      hygieneInitiative: hygieneInitiative,
+      comments: comments,
+      buyerId: buyerId,
+    };
+    Orders.createOrder(orderToBeMade)
+      .then((newOrder) => {
+        console.log('NEW ORDER CREATED: ', newOrder);
+      })
+      .catch((err) => {
+        console.log(err);
       });
-      console.log(`THIS IS THE PAYMENT INTENT: \n`, paymentIntent);
-      const orderToBeMade = {
-        paymentID: req.body.id,
-        organizationName: organizationName,
-        organizationWebsite: organizationWebsite,
-        contactName: contactName,
-        soapBarNum: soapBarNum,
-        contactPhone: contactPhone,
-        contactEmail: contactEmail,
-        address: address,
-        country: country,
-        beneficiariesNum: beneficiariesNum,
-        hygieneSituation: hygieneSituation,
-        hygieneInitiative: hygieneInitiative,
-        comments: comments,
-        buyerId: buyerId,
-      };
-      Orders.createOrder(orderToBeMade)
-        .then((newOrder) => {
-          console.log('NEW ORDER CREATED: ', newOrder);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      res.json({ client_secret: paymentIntent['client_secret'] });
-      delete qualifications[qID]
-    } else {
-      res.status(401).json({ error: 'Unauthorized QualificationID' });
-    }
-  });
+    res.json({ client_secret: paymentIntent['client_secret'] });
+    delete qualifications[qID];
+  } else {
+    res.status(401).json({ error: 'Unauthorized QualificationID' });
+  }
+});
 
 module.exports = router;
