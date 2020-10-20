@@ -6,7 +6,12 @@ module.exports = {
   findBuyerById,
   findOrder,
   addOrder,
+  findBy,
 };
+
+function findBy(filter) {
+  return DB('buyer').where(filter);
+}
 
 function addBuyer(buyer) {
   return DB('buyer')
