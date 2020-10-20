@@ -40,6 +40,7 @@
   },
   "dependencies": {
     "@okta/jwt-verifier": "^1.0.0",
+    "@okta/oidc-middleware": "^4.0.1",
     "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "~1.4.4",
@@ -47,6 +48,7 @@
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
     "express": "~4.16.1",
+    "express-session": "^1.17.1",
     "faker": "^4.1.0",
     "graphql": "^15.3.0",
     "graphql-request": "^3.1.0",
@@ -58,7 +60,8 @@
     "pg": "^8.4.0",
     "stripe": "^8.112.0",
     "swagger-jsdoc": "^4.0.0",
-    "swagger-ui-express": "^4.1.4"
+    "swagger-ui-express": "^4.1.4",
+    "uuid": "^8.3.1"
   },
   "devDependencies": {
     "cross-env": "^7.0.2",
