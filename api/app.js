@@ -22,9 +22,8 @@ const swaggerUIOptions = {
 //###[  Routers ]###
 const indexRouter = require('./index/indexRouter');
 const orderRouter = require('./orders/orderRouter');
-
-// 27 added by PBS
 const buyerRouter = require('./users/buyerRouter.js');
+const authRouter = require('./auth/authRouter.js')
 
 const app = express();
 
@@ -53,9 +52,9 @@ app.use(cookieParser());
 // application routes
 app.use('/', indexRouter);
 app.use('/orders', orderRouter);
-
-// 59 & 60 added by PBS
 app.use('/buyers', buyerRouter);
+app.use('/auth', authRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
