@@ -4,7 +4,10 @@ const jwt = require("jsonwebtoken");
 
 const Buyers = require("../users/buyerModel.js");
 
-router.post("/login", (req, res) => {
+
+
+// Buyer Login
+router.post("/buyer/login", (req, res) => {
     const { email, password } = req.body;
   
     if (isValid(req.body)) {
@@ -18,8 +21,9 @@ router.post("/login", (req, res) => {
             .json({
               message: `Welcome ${email}`,
               token,
-              user_id: user.id,
+              buyer_id: user.id,
               email: user.email,
+              admin: false
             });
         } else {
           res.status(401).json({ message: "Invalid Credentials" });
@@ -32,10 +36,10 @@ router.post("/login", (req, res) => {
     }
   });
 
-
-router.post("/register", (req, res) => {
+//  Buyer Register
+router.post("/buyer/register", (req, res) => {
 const credentials = req.body;
-console.log(credentials)
+
 if (isValid(credentials)) {
     const hash = bcryptjs.hashSync(credentials.password, 8);
     credentials.password = hash;
