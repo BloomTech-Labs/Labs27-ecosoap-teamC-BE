@@ -10,7 +10,7 @@ module.exports = {
 };
 
 function findBy(filter) {
-  return DB("buyer").where(filter);
+  return DB('buyer').where(filter);
 }
 
 function addBuyer(buyer) {
