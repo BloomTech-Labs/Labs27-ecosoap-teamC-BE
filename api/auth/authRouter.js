@@ -22,7 +22,7 @@ router.post("/admin/login", (req, res) => {
             .json({
               message: `Welcome ${email}`,
               token,
-              buyer_id: user.id,
+              admin_id: user.id,
               email: user.email,
               admin: true
             });
@@ -53,7 +53,7 @@ if (isValid(credentials)) {
         .json({
             data: user,
             token,
-            buyer_id: user.id,
+            admin_id: user.id,
             email: user.email,
             admin: true
         });
