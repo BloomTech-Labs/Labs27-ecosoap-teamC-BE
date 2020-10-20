@@ -8,24 +8,18 @@ You can find the deployed project at [https://27c.ecosoap.dev/](https://27c.ecos
 
 ## Contributors
 
-🚫Add contributor info below, make sure add images and edit the social links for each member. Add to or delete these place-holders as needed
-
-|                                         [Project Lead](https://github.com/exploratum)                                         |                                          [Student 1](https://github.com/tannerwill756)                                           |                                   [Student 2](https://github.com/KristianCorrea)                                    |                                   [Student 3](https://github.com/prakashbasingh)                                    |                                                      [Student 4](https://github.com/)                                                       |
-| :---------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: |
-| [<img src="https://ca.slack-edge.com/ESZCHB482-W0123RJ91AT-ca163ceee412-512" width = "200" />](https://github.com/exploratum) | [<img src="https://ca.slack-edge.com/ESZCHB482-W012BRSQ7QE-d00d40e32383-512" width = "200" />](https://github.com/tannerwill756) | [<img src="https://ca.slack-edge.com/ESZCHB482-W0138D9L0KA-1f3b536b798f-512" width = "200" />](https://github.com/) | [<img src="https://ca.slack-edge.com/ESZCHB482-W012QNXAHHA-3718df56a021-512" width = "200" />](https://github.com/) | [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/) |
-|                         [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/)                         |                      [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/honda0306)                      |              [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Mister-Corn)               |             [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/NandoTheessen)              |                           [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/wvandolah)                            |
-|         [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)         |          [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)           |    [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)    |    [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)    |                [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                |
+|                                         [Project Lead](https://github.com/exploratum)                                         |                                           [Student 1](https://github.com/tannerwill756)                                            |                                          [Student 2](https://github.com/KristianCorrea)                                           |                                              [Student 3](https://github.com/prakashbasingh)                                              |
+| :---------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------: |
+| [<img src="https://ca.slack-edge.com/ESZCHB482-W0123RJ91AT-ca163ceee412-512" width = "200" />](https://github.com/exploratum) |  [<img src="https://ca.slack-edge.com/ESZCHB482-W012BRSQ7QE-d00d40e32383-512" width = "200" />](https://github.com/tannerwill756)  | [<img src="https://ca.slack-edge.com/ESZCHB482-W0138D9L0KA-1f3b536b798f-512" width = "200" />](https://github.com/KristianCorrea) |    [<img src="https://ca.slack-edge.com/ESZCHB482-W012QNXAHHA-3718df56a021-512" width = "200" />](https://github.com/prakashbasingh)     |
+|                    [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/exploratum)                    |                     [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/tannerwill756)                     |                    [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/KristianCorrea)                    |                       [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/prakashbasingh)                        |
+|    [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/tjoux/)     | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/tanner-m-williams/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/kristian-correa/)  | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/prakash-singh-457100177/) |
 
 <br>
 <br>
-
-🚫 Optional examples of using images with links for your tech stack, make sure to change these to fit your project
 
 ![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
 ![node express](https://img.shields.io/node/v-lts/express)
 ![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)
-
-🚫 more info on using badges [here](https://github.com/badges/shields)
 
 ### Key Features
 
@@ -35,37 +29,22 @@ You can find the deployed project at [https://27c.ecosoap.dev/](https://27c.ecos
 - feature four
 - feature five
 
-#### Back end deployed to `🚫insert service here`
+#### Back end deployed to Heroku
 
-#### [Front end](🚫link to back end repo here) built using:
+#### [Back end](https://github.com/Lambda-School-Labs/Labs27-ecosoap-teamC-BE) built using:
 
-#### 🚫 back end framework and key libraries go here
-
-- point one
-- point two
-- point three
-
-🚫 List the rest of the back end end features and libraries in the same format as the framework above
+- NodeJS
+- Express
+- PostgreSQL
+- Stripe
+- JWT
+- BcryptJS
 
 # APIs
 
 ## Authentication API here
 
-🚫Replace text below with a description and link to your API swagger docs
-
-Water's like me. It's laaazy ... Boy, it always looks for the easiest way to do things A little happy sunlight shining through there. Let all these little things happen. Don't fight them. Learn to use them. Even the worst thing we can do here is good.
-
-## Payment API here
-
-🚫Replace text below with a description of the API or delete
-
-This is the way you take out your flustrations. Get away from those little Christmas tree things we used to make in school. Isn't it fantastic that you can change your mind and create all these happy things? Everything's not great in life, but we can still find beauty in it.
-
-## Misc API here
-
-🚫Replace text below with a description of the API
-
-You can do anything your heart can imagine. In life you need colors. This is where you take out all your hostilities and frustrations. It's better than kicking the puppy dog around and all that so. I'm sort of a softy, I couldn't shoot Bambi except with a camera. Trees get lonely too, so we'll give him a little friend. We'll lay all these little funky little things in there.
+View our endpoint documentation [here](https://labs27-ecosoap-teamc-api.herokuapp.com/api-docs/).
 
 ## Getting Started
 
@@ -148,4 +127,4 @@ Remember that this project is licensed under the MIT license, and by submitting 
 
 ## Documentation
 
-See [Backend Documentation](🚫*link to your backend API SWAGGER DOCS here*) for details on the backend of our project.
+See [Backend Documentation](https://labs27-ecosoap-teamc-api.herokuapp.com/api-docs/) for details on the backend of our project.
