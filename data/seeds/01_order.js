@@ -7,7 +7,7 @@ exports.seed = function (knex) {
       // Inserts seed entries
       return knex('order').insert([
         {
-          paymentID: "d1c3cd24-0f36",
+          paymentID: 'd1c3cd24-0f36',
           organizationName: 'Nepal unicef',
           organizationWebsite: 'www.kathmandunepal.com',
           contactName: 'Super Man',
@@ -23,7 +23,7 @@ exports.seed = function (knex) {
           buyerId: 1,
         },
         {
-          paymentID: "e02f1198-0f36",
+          paymentID: 'e02f1198-0f36',
           organizationName: 'Cambodia unicef',
           organizationWebsite: 'www.Phnompenhcambodia.com',
           contactName: 'Spider Man',
@@ -39,7 +39,7 @@ exports.seed = function (knex) {
           buyerId: 2,
         },
         {
-          paymentID: "ed05d7c6-0f36",
+          paymentID: 'ed05d7c6-0f36',
           organizationName: 'Kenya unicef',
           organizationWebsite: 'www.nairobikenya.com',
           contactName: 'Iron Man',
@@ -54,7 +54,7 @@ exports.seed = function (knex) {
           comments: 'No Comment',
         },
         {
-          paymentID: "f33b71be-0f36",
+          paymentID: 'f33b71be-0f36',
           organizationName: 'South Africa unicef',
           organizationWebsite: 'www.capetownsouthafrica.com',
           contactName: 'Ant Man',
@@ -69,7 +69,7 @@ exports.seed = function (knex) {
           comments: 'No Comment',
         },
         {
-          paymentID: "f8d1bf52-0f36",
+          paymentID: 'f8d1bf52-0f36',
           organizationName: 'Tanzania unicef',
           organizationWebsite: 'www.dodomatanzania.com',
           contactName: 'Flash Man',
