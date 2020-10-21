@@ -21,13 +21,6 @@ Recorded DEMO: https://drive.google.com/file/d/1dpYnVKaaeAq3YoGisHMZu8kT31qOWAgf
 ![node express](https://img.shields.io/node/v-lts/express)
 ![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)
 
-### Key Features
-
-- feature one
-- feature two
-- feature three
-- feature four
-- feature five
 
 #### Back end deployed to Heroku
 
