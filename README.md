@@ -1,10 +1,10 @@
 # ecosoap-be
 
-For steps on how to work with this repository [please see here](https://docs.labs.lambdaschool.com/labs-spa-starter/)
-
 # Project
 
 You can find the deployed project at [https://27c.ecosoap.dev/](https://27c.ecosoap.dev/).
+
+Recorded DEMO: https://drive.google.com/file/d/1dpYnVKaaeAq3YoGisHMZu8kT31qOWAgf/view?usp=sharing
 
 ## Contributors
 
